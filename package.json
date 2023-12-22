@@ -1,0 +1,14 @@
+{
+  "name": "jsaqa_3_2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright"
+  },
+  "author": "holzQA diatmin@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "playwright": "^1.40.0"
+  }
+}
