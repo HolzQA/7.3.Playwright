@@ -9,6 +9,7 @@
   "author": "holzQA diatmin@gmail.com",
   "license": "ISC",
   "devDependencies": {
+    "@playwright/test": "^1.40.1",
     "playwright": "^1.40.0"
   }
 }

@@ -4,7 +4,7 @@ const { email, password } = require("../user");
 test.describe("Авторизация", () => {
     test("Успешная авторизация", async ({ page }) => {
         await page.goto("https://netology.ru/?modal=sign_in");
-        await page.goto("https://netology.ru/?modal=sign_in");
+        await expect(page).toContainText("Вход в личный кабинет");
         await page.click("//input [@placeholder='Email']").fill(email);
         await page.click("//input [@placeholder='Пароль']").fill(password);
         await page.click("//* [@data-testid='login-submit-btn']");
@@ -13,7 +13,7 @@ test.describe("Авторизация", () => {
 
     test("Неуспешная авторизация", async ({ page }) => {
         await page.goto("https://netology.ru/?modal=sign_in");
-        await page.goto("https://netology.ru/?modal=sign_in");
+        await expect(page).toContainText("Вход в личный кабинет");
         await page.click("//input [@placeholder='Email']").fill("fghsdf@gmail.com");
         await page.click("//input [@placeholder='Пароль']").fill("sfksjdb");
         await page.click("//* [@data-testid='login-submit-btn']");
