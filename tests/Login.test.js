@@ -1,22 +1,25 @@
+const { test, expect } = require("@playwright/test");
 const { email, password } = require("../user");
+const { invalidEmail, invalidPassword } = require("../notAuthorizedUser");
+
 
 
 test.describe("Авторизация", () => {
     test("Успешная авторизация", async ({ page }) => {
         await page.goto("https://netology.ru/?modal=sign_in");
-        await expect(page).toContainText("Вход в личный кабинет");
-        await page.click("//input [@placeholder='Email']").fill(email);
-        await page.click("//input [@placeholder='Пароль']").fill(password);
+        await expect(page.locator("//* [@class='styles_title__ImB5r']")).toContainText('Вход в личный кабинет');
+        await page.fill("//input [@placeholder='Email']", email);
+        await page.fill("//input [@placeholder='Пароль']", password);
         await page.click("//* [@data-testid='login-submit-btn']");
-        await expect(page.url()).toBe("https://netology.ru/profile");
+        await expect(page.url()).toBe("https://netology.ru/profile/8187730");
     });
 
     test("Неуспешная авторизация", async ({ page }) => {
         await page.goto("https://netology.ru/?modal=sign_in");
-        await expect(page).toContainText("Вход в личный кабинет");
-        await page.click("//input [@placeholder='Email']").fill("fghsdf@gmail.com");
-        await page.click("//input [@placeholder='Пароль']").fill("sfksjdb");
+        await expect(page.locator("//* [@class='styles_title__ImB5r']")).toContainText('Вход в личный кабинет');
+        await page.fill("//input [@placeholder='Email']", invalidEmail);
+        await page.fill("//input [@placeholder='Пароль']", invalidPassword);
         await page.click("//* [@data-testid='login-submit-btn']");
-        await expect(page).toBeVisible("//* [@data-testId='login-error-hint']");
+        await expect(page.locator("//* [@data-testId='login-error-hint']")).toBeVisible();
     });
 });
